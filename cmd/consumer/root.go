@@ -7,11 +7,11 @@ import (
 	api "github.com/jim-junior/eda/cmd/api"
 )
 
-func RunConsumer() error {
+func RunConsumer(topic string) error {
 	redisClient := api.NewRedisClient()
 	for {
 		// Get the resource from the message queue
-		pubsub := redisClient.Subscribe(context.Background(), "messages")
+		pubsub := redisClient.Subscribe(context.Background(), topic)
 
 		ch := pubsub.Channel()
 

@@ -17,14 +17,14 @@ func StartServer() {
 	})
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Send a post request to /send-sms")
+		return c.SendString("Send a post request to /{topic}. Replace `topic` with the topic you would like the event to be published. The post request body/data payload should be event payload you want to send")
 	})
 
 	redisClient := NewRedisClient()
 
-	app.Post("/send-sms", func(c *fiber.Ctx) error {
+	app.Post("/:topic", func(c *fiber.Ctx) error {
 		// Publish to redis channel for driver to work on it
-		errf := redisClient.Publish(context.Background(), "messages",
+		errf := redisClient.Publish(context.Background(), c.Params("topic"),
 			c.Body(),
 		)
 		if errf.Err() != nil {
