@@ -34,3 +34,5 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: output/eda-${{ github.event.release.tag_name }}-${{ matrix.os }}-${{ runner.arch }}${{ matrix.ext }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
