@@ -9,6 +9,7 @@ import (
 
 func RunConsumer(topic string) error {
 	redisClient := api.NewRedisClient()
+	fmt.Println("Consumer subscribed to `" + topic + "` Topic")
 	for {
 		// Get the resource from the message queue
 		pubsub := redisClient.Subscribe(context.Background(), topic)
