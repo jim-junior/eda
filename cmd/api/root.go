@@ -22,7 +22,7 @@ func StartServer() {
 
 	redisClient := NewRedisClient()
 
-	app.Post("/:topic", func(c *fiber.Ctx) error {
+	app.Post("/topic/:topic", func(c *fiber.Ctx) error {
 		// Publish to redis channel for driver to work on it
 		errf := redisClient.Publish(context.Background(), c.Params("topic"),
 			c.Body(),
