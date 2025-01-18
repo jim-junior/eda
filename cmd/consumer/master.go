@@ -38,7 +38,7 @@ func RunDFEConsumer() error {
 	for {
 		// Get the resource from the message queue
 
-		fmt.Println("Fetching Events from Event Queue")
+		fmt.Println("Listening for Events from Event Queue")
 
 		len, err := redisClient.LLen(ctx, "message:queue").Result()
 
@@ -57,7 +57,7 @@ func RunDFEConsumer() error {
 			fmt.Println(err)
 		}
 
-		fmt.Println(msg)
+		fmt.Println("Processing event: " + msg)
 
 		time.Sleep(10 * time.Second)
 

@@ -18,8 +18,8 @@ func RunConsumer(topic string) error {
 
 		for msg := range ch {
 
-			fmt.Println("Recieved Message")
-			fmt.Println(msg)
+			fmt.Println("Received event on topic: " + topic)
+			fmt.Println("Event data: " + msg.String())
 		}
 	}
 }
